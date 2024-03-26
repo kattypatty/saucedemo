@@ -13,3 +13,10 @@
 3. Adding a product to the cart from the product card
 4. Removing an item from the cart via the item page
 
+# Item page
+
+1. Successful transition to the item page after clicking on the product image
+2. Successful transition to the item page after clicking on the product name
+
+
+
