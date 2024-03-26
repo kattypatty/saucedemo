@@ -6,4 +6,10 @@
 4. Click "Login"
 5. Check that we have moved to a new url: <https://www.saucedemo.com/v1/inventory.html>
 
-# 
+# Shopping cart
+
+1. Adding a product to the cart through the catalog
+2. Removing an item from the cart via the cart
+3. Adding a product to the cart from the product card
+4. Removing an item from the cart using the item card
+
