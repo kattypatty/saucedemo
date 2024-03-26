@@ -14,9 +14,23 @@ def test_auth_positive():
 
 def test_shopping_cart():
     test_auth_positive()
-    browser.find_element(By.XPATH, '//*[@id="shopping_cart_container"]/a').click()
 
-    time.sleep(10)
+    # On inventory page, click on "Add to cart" button.
+    browser.find_element(By.XPATH, "//*[@class='btn_primary btn_inventory']").click()
+
+    # On inventory page, click on "Add to cart" button.
+    browser.find_element(By.XPATH, "//*[@class='btn_primary btn_inventory']").click()
+
+    # On inventory page, click on the cart.
+    browser.find_element(By.XPATH, "//*[@id='shopping_cart_container']/a").click()
+
+    # On cart page, click on the "remove" button.
+    browser.find_element(By.XPATH, "//*[@class='btn_secondary cart_button']").click()
+
+    # On cart page, click to choose the item and click on "remove" button from the item page
+    browser.find_element(By.XPATH, "//*[@class='inventory_item_name']").click()
+    browser.find_element(By.XPATH, "//*[@class='btn_secondary btn_inventory']").click()
+    time.sleep(100)
 
     # browser.quit()
 

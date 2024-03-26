@@ -11,5 +11,5 @@
 1. Adding a product to the cart through the catalog
 2. Removing an item from the cart via the cart
 3. Adding a product to the cart from the product card
-4. Removing an item from the cart using the item card
+4. Removing an item from the cart via the item page
 
