@@ -2,7 +2,7 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
-from selenium.webdriver.support.wait import WebDriverWait
+from selenium.common.exceptions import NoSuchElementException
 import time
 
 browser = webdriver.Chrome()
@@ -15,8 +15,14 @@ def auth():
     browser.find_element('xpath', '//*[@id="user-name"]').send_keys('standard_user')
     browser.find_element(By.XPATH, '//*[@id="password"]').send_keys('secret_sauce')
     browser.find_element(By.XPATH, '//*[@id="login-button"]').click()
-    assert browser.current_url == 'https://www.saucedemo.com/v1/inventory.html', 'url не соответствует ожидаемому'
+    assert browser.current_url == 'https://www.saucedemo.com/v1/inventory.html', browser.current_url
 
+def test_auth_with_incorrect_data(auth):
+    browser.get('https://www.saucedemo.com/v1/')
+    browser.find_element('xpath', '//*[@id="user-name"]').send_keys('user')
+    browser.find_element(By.XPATH, '//*[@id="password"]').send_keys('user')
+    browser.find_element(By.XPATH, '//*[@id="login-button"]').click()
+    assert browser.current_url == 'https://www.saucedemo.com/v1/', browser.current_url
 
 def test_shopping_cart(auth):
     # On inventory page, click on "Add to cart" button.
@@ -98,15 +104,38 @@ def test_burger_menu_logout(auth):
 def test_burger_menu_about(auth):
     # On inventory page, click on "burger button" and side bar will appear
     browser.find_element(By.XPATH, "//*[@class='bm-burger-button']").click()
-    # Click on "About" button in menu and page successfully transfers
 
+    # Click on "About" button in menu and page successfully transfers
     browser.find_element(By.XPATH, "//*[@id='about_sidebar_link']").click()
     assert browser.current_url == 'https://saucelabs.com/', browser.current_url
 
+def test_reset_app_state(auth):
+    # On inventory page, click on "Add to cart" button.
+    browser.find_element(By.XPATH, "//*[@class='btn_primary btn_inventory']").click()
+
+    # On inventory page, click on the shopping cart.
+    browser.find_element(By.XPATH, "//*[@id='shopping_cart_container']/a").click()
+
+    # On inventory page, click on "burger button" and side bar will appear
+    browser.find_element(By.XPATH, "//*[@class='bm-burger-button']").click()
+    
+    # Click on "Reset App State" button in menu and removes items from shopping cart
+    browser.find_element(By.XPATH, "//*[@id='reset_sidebar_link']").click()
+
+    # Checking if the shoppig card is empty
+    try:
+        browser.find_element(By.XPATH, "//*[@class='fa-layers-counter shopping_cart_badge']")
+        assert False, "Shopping cart should be empty."
+    except NoSuchElementException:
+        pass    
+
+#test_auth_with_incorrect_data()
 #test_shopping_cart()
 #test_item_page()
 #test_placing_order()
 #test_filters()
 #test_burger_menu_logout()
 #test_burger_menu_about()
+#test_reset_app_state()
+
 
