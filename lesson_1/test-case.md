@@ -21,4 +21,12 @@
 # Placing an order
 
 1. Placing an order using correct data
+-------------------------------------------------------------------------------
+# Testing filters
+
+1. Checking the filter functionality (A to Z)
+2. Checking filter functionality (Z to A)
+3. Checking filter functionality (low to high)
+4. Checking filter functionality (high to low)
+-------------------------------------------------------------------------------
 
