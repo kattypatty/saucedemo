@@ -29,4 +29,8 @@
 3. Checking filter functionality (low to high)
 4. Checking filter functionality (high to low)
 -------------------------------------------------------------------------------
+# Burger menu
 
+1. Sign Out
+2. Checking the functionality of the "About" button in the menu
+3. Checking the functionality of the "Reset App State" button
