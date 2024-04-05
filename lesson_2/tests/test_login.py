@@ -10,7 +10,11 @@ class TestLogin:
     
     def test_login_positive(self, driver): 
         page = LoginPage(driver, self.url.base_url)
+
+        # opening webrowser
         page.open()
+
+        # Authentication process to get access to website
         page.login()
 
         # Checking the actual title of the home page
