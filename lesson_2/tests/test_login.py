@@ -8,15 +8,9 @@ class TestLogin:
     url = Urls()
     main_locators = MainPage_Locators()
     
-    def test_login_positive(self, driver): 
+    def test_login_positive(self, driver):
         page = LoginPage(driver, self.url.base_url)
-
-        # opening webrowser
-        page.open()
-
-        # Authentication process to get access to website
-        page.login()
-
+    
         # Checking the actual title of the home page
         actual_title = page.get_text(self.main_locators.TITLE)
         expected_title = "Products"
@@ -25,13 +19,11 @@ class TestLogin:
 
     def test_login_len_cards(self, driver):
         page = LoginPage(driver, self.url.base_url)
-        page.open()
-        page.login()
 
         # Checking the number of items on the main page
         expected_len = 6
-        cards = page.get_lenght(self.main_locators.INVENTORY_ITEMS)
+        cards = page.get_length(self.main_locators.INVENTORY_ITEMS)
         assert cards == expected_len, f"Expected: {expected_len}, actual: {cards}"
-        time.sleep(3)
+        #time.sleep(3)
 
 
