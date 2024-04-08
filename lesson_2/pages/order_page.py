@@ -10,7 +10,13 @@ class OrderPage(BasePage):
     main_locators = MainPage_Locators()
     cart_locators = CartLocators()
 
-    def order_without_credential(self, lst_data):
+    def order_with_valid_credential(self, lst_data):
+        self.add_item_to_cart()
+        self.fill_fields(lst_data[0], lst_data[1], lst_data[2])
+        self.click_on_element(self.order_locators.FINISH_BTN)
+        return self.get_text(self.order_locators.SUCCESSFUL_ORDER)
+
+    def order_with_invalid_credential(self, lst_data):
         self.add_item_to_cart()
         self.fill_fields(lst_data[0], lst_data[1], lst_data[2])
         return self.get_text(self.order_locators.ERROR_MESSAGE)
