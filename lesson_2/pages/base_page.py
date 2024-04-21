@@ -1,5 +1,7 @@
 from selenium.webdriver.support.ui import WebDriverWait as wait
 from selenium.webdriver.support import expected_conditions as EC
+import allure
+import pytest
 
 from lesson_2.locators.login_locators import LoginLocators
 from lesson_2.src.user_data import UserData
@@ -18,19 +20,26 @@ class BasePage:
         # Authentication process to get access to website
         self.login()
     
+    @allure.step("Login")
     def login(self):
-        self.element_is_visible(self.locators.USER_NAME).send_keys(self.user.standart_user_name)
-        self.element_is_visible(self.locators.PASSWORD).send_keys(self.user.password)
-        self.element_is_clickable(self.locators.LOGIN).click()
+        with allure.step("Username"):
+            self.element_is_visible(self.locators.USER_NAME).send_keys(self.user.standart_user_name)
+        with allure.step("Password"):   
+            self.element_is_visible(self.locators.PASSWORD).send_keys(self.user.password)
+        with allure.step("Click_Login_Button"):
+            self.element_is_clickable(self.locators.LOGIN).click()
 
+    @allure.step("Open browser")
     # opening webrowser
     def open(self):
         self.driver.get(self.url)
 
+    @allure.step("Get text")
     # getting text to check the actual title of the home page
     def get_text(self, locator):
         return self.element_is_visible(locator).text
 
+    @ allure.step("Get length")
     # getting the length or number of inventory cards on the home page
     def get_length(self, locator):
         return len(self.elements_are_visible(locator))

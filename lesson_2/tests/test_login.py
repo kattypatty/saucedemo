@@ -2,12 +2,19 @@ import time
 from lesson_2.locators.main_page_locators import MainPage_Locators
 from lesson_2.pages.login_page import LoginPage
 from lesson_2.src.urls import Urls
+import allure
 
+@allure.epic("Testing login page")
 # From login_page.py file calling LoginPage class
 class TestLogin:
     url = Urls()
     main_locators = MainPage_Locators()
     
+    @allure.title("test positive login")
+    @allure.description("Test checks the actual title when the user lands on the home page")
+
+    # if the user is not logger then the page will not work
+    @allure.severity(allure.severity_level.BLOCKER) 
     def test_login_positive(self, driver):
         page = LoginPage(driver, self.url.base_url)
     
@@ -17,6 +24,10 @@ class TestLogin:
         assert actual_title == expected_title, \
             f"Unexpected text, expected text: {expected_title},actual text: {actual_title} "
 
+    @allure.title("test login number of cards")
+    @allure.description("Test checks the actual title when the user lands on the home page and see all cards of store products")
+    @allure.severity(allure.severity_level.BLOCKER) 
+    
     def test_login_len_cards(self, driver):
         page = LoginPage(driver, self.url.base_url)
 
