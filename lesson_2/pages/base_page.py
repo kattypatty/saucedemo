@@ -4,12 +4,14 @@ import allure
 import pytest
 
 from lesson_2.locators.login_locators import LoginLocators
+from lesson_2.locators.main_page_locators import MainPage_Locators
 from lesson_2.src.user_data import UserData
 
 
 class BasePage:
     timeout = 10
-    locators = LoginLocators()
+    login_locators = LoginLocators()
+    main_locators = MainPage_Locators()
     user = UserData()
 
     def __init__(self, driver, url):
@@ -58,3 +60,6 @@ class BasePage:
     
     def elements_are_visible(self, locator, timeout=timeout):
         return wait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
+    
+    def check_card(self, value):
+        self.main_locators.get_card(value=value)

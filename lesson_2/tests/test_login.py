@@ -1,3 +1,4 @@
+import pytest
 import time
 from lesson_2.locators.main_page_locators import MainPage_Locators
 from lesson_2.pages.login_page import LoginPage
@@ -37,4 +38,10 @@ class TestLogin:
         assert cards == expected_len, f"Expected: {expected_len}, actual: {cards}"
         #time.sleep(3)
 
-
+    # print number of all card products
+    @pytest.mark.parametrize("value", range(1, 7))
+    def test_check_cards(self, driver, value):
+        page = LoginPage(driver, self.url.base_url)
+        locator = page.check_card(value)
+        print(locator)
+        
